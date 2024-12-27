@@ -64,7 +64,12 @@ const scrapeTrends = async () => {
             .addArguments('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36')
             .setProxy(proxy.manual({ http: proxyUrl, https: proxyUrl }));
 
-        driver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();
+
+         driver = await new Builder()
+          .forBrowser('chrome')
+          .setChromeOptions(options)
+          .setChromeService(new chrome.ServiceBuilder('/usr/bin/chromedriver')) // Specify ChromeDriver path
+          .build();
 
         try {
             const axiosConfig = {
